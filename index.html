@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIEDE AI Leaders — Programa de Formación Ejecutiva</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #FAFAF8;
+  --white:    #FFFFFF;
+  --cream:    #F5F3EE;
+  --cream2:   #EDE9E0;
+  --border:   #E0DAD0;
+  --border2:  #CCC5B8;
+  --gold:     #A07830;
+  --goldL:    #C49A50;
+  --goldD:    #7A5C20;
+  --goldBg:   #FBF6EE;
+  --goldLine: #D4A84B;
+  --text:     #1A1815;
+  --text2:    #3D3830;
+  --sub:      #6B6358;
+  --muted:    #9E9690;
+  --green:    #2D7A4F;
+  --red:      #B84040;
+  --blue:     #2A5F8A;
+  --purple:   #6B4A9A;
+  --orange:   #B86820;
+  --teal:     #1A7A6A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Jost',sans-serif;line-height:1.65;min-height:100vh}
+
+/* ── HERO ── */
+.hero{
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 72px 24px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(160,120,48,0.07) 0%, transparent 60%);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.hero-line{width:40px;height:1px;background:var(--goldLine)}
+.hero-badge{
+  font-family:'JetBrains Mono',monospace;
+  font-size: 10px;
+  letter-spacing: .22em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.hero h1{
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px,6vw,68px);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--text);
+  letter-spacing: -.02em;
+  position: relative;
+}
+.hero h1 em{
+  font-style: italic;
+  color: var(--gold);
+}
+.hero-sub{
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px,2.5vw,22px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--sub);
+  max-width: 580px;
+  margin: 20px auto 0;
+  line-height: 1.6;
+}
+.hero-divider{
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--goldLine), transparent);
+  margin: 32px auto;
+}
+.hero-tags{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-tag{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+  color: var(--sub);
+  border: 1px solid var(--border2);
+  padding: 5px 14px;
+  border-radius: 2px;
+  background: var(--cream);
+}
+
+/* ── NAV ── */
+.nav{
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav::-webkit-scrollbar{display:none}
+.nav-btn{
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 16px 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .15em;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all .25s;
+  text-transform: uppercase;
+}
+.nav-btn:hover{color:var(--gold)}
+.nav-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* ── CONTENT ── */
+.content{max-width:960px;margin:0 auto;padding:56px 24px 100px}
+.tab{display:none}
+.tab.active{display:block}
+
+/* ── SECTION HEADING ── */
+.sec-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:.18em;
+  color:var(--gold);text-transform:uppercase;
+  display:block;margin-bottom:12px;
+}
+.sec-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,4vw,42px);
+  font-weight:400;line-height:1.1;
+  color:var(--text);margin-bottom:12px;
+  letter-spacing:-.02em;
+}
+.sec-sub{
+  font-size:15px;color:var(--sub);
+  max-width:600px;line-height:1.7;margin-bottom:36px;
+}
+
+/* ── CARDS ── */
+.card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:28px 30px;
+  margin-bottom:16px;
+}
+.card-gold{
+  background:var(--goldBg);
+  border:1px solid rgba(160,120,48,.25);
+  border-left:3px solid var(--goldLine);
+  border-radius:6px;
+  padding:28px 30px;
+  margin-bottom:16px;
+}
+.card-cream{
+  background:var(--cream);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:28px 30px;
+  margin-bottom:16px;
+}
+
+/* ── FORMULA ── */
+.formula{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.chip{
+  padding:14px 18px;border-radius:6px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  flex:1;min-width:100px;text-align:center;
+  border:1px solid currentColor;
+}
+
+/* ── PAIN POINTS ── */
+.pain-row{display:flex;gap:16px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border);align-items:flex-start}
+.pain-row:last-child{border-bottom:none;margin:0;padding:0}
+.pain-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--red);min-width:68px;flex-shrink:0;line-height:1}
+.pain-text{font-size:14px;color:var(--sub);line-height:1.7;padding-top:4px}
+
+/* ── ARROW ITEMS ── */
+.arrow-item{display:flex;gap:12px;margin-bottom:12px}
+.arrow-item:last-child{margin:0}
+.arrow-sym{color:var(--goldLine);font-size:14px;flex-shrink:0;padding-top:2px}
+.arrow-text{font-size:14px;color:var(--text2);line-height:1.7}
+
+/* ── PILLAR GRID ── */
+.pillar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:28px}
+.pillar-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:6px;padding:18px;
+  border-top:3px solid var(--goldLine);
+  transition:box-shadow .2s,transform .2s;
+}
+.pillar-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.06);transform:translateY(-2px)}
+.pillar-icon{font-size:24px;margin-bottom:10px}
+.pillar-num{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;margin-bottom:5px}
+.pillar-name{font-size:13px;font-weight:500;margin-bottom:6px;line-height:1.4;color:var(--text)}
+.pillar-kpi{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+
+/* ── LEVELS ── */
+.level-row{display:flex;gap:16px;padding:14px 16px;margin-bottom:6px;border-radius:4px;align-items:center}
+.level-range{font-family:'JetBrains Mono',monospace;font-size:11px;min-width:54px;flex-shrink:0;font-weight:500}
+.level-name{font-size:13px;font-weight:500;margin-bottom:3px}
+.level-desc{font-size:12px;color:var(--sub)}
+
+/* ── ACCORDION ── */
+.accordion{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:6px;margin-bottom:8px;cursor:pointer;
+  overflow:hidden;transition:border-color .2s,box-shadow .2s;
+}
+.accordion:hover{border-color:var(--goldLine);box-shadow:0 2px 12px rgba(160,120,48,.08)}
+.acc-head{display:flex;align-items:center;gap:14px;padding:16px 20px}
+.acc-week{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--muted);min-width:46px;flex-shrink:0;
+}
+.acc-info{flex:1}
+.acc-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.acc-badge{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  padding:2px 8px;border-radius:2px;letter-spacing:.08em;flex-shrink:0;
+}
+.acc-meta{font-size:11px;color:var(--muted)}
+.acc-arrow{font-size:11px;color:var(--muted);flex-shrink:0}
+.acc-body{padding:0 20px 20px;border-top:1px solid var(--border);display:none}
+.acc-body.open{display:block}
+.acc-desc{font-size:13px;color:var(--sub);line-height:1.75;margin:14px 0}
+.acc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.acc-item{background:var(--cream);border-radius:4px;padding:14px}
+.acc-item-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;margin-bottom:5px;color:var(--gold)}
+.acc-item-val{font-size:12px;color:var(--text2);line-height:1.5}
+
+/* ── TIER CARDS ── */
+.tier-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:6px;margin-bottom:12px;cursor:pointer;
+  overflow:hidden;transition:all .2s;
+}
+.tier-card:hover{border-color:var(--goldLine);box-shadow:0 4px 24px rgba(160,120,48,.1)}
+.tier-head{display:flex;align-items:center;gap:16px;padding:20px 24px}
+.tier-lv{
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  width:38px;height:38px;border-radius:4px;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;
+}
+.tier-info{flex:1}
+.tier-name{font-size:16px;font-weight:500;color:var(--text);margin-bottom:2px}
+.tier-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em}
+.tier-price{text-align:right}
+.tier-price-main{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:400;color:var(--gold);
+}
+.tier-price-unit{font-size:11px;color:var(--muted);margin-top:2px}
+.tier-body{padding:0 24px 24px;border-top:1px solid var(--border);display:none}
+.tier-body.open{display:block}
+.tier-assess{
+  background:var(--goldBg);
+  border:1px solid rgba(160,120,48,.2);
+  border-radius:4px;padding:12px 16px;margin:16px 0;
+}
+.tier-assess-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--gold);margin-bottom:5px}
+.tier-assess-val{font-size:13px;color:var(--text2);line-height:1.5}
+.tier-items-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--muted);margin-bottom:10px;text-transform:uppercase}
+.tier-item{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text2)}
+.tier-item:last-child{border-bottom:none}
+.tier-check{font-size:12px;flex-shrink:0;margin-top:1px}
+
+/* ── META GRID ── */
+.meta-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:28px}
+.meta-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:6px;padding:18px;text-align:center;
+}
+.meta-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;font-weight:400;color:var(--gold);margin-bottom:5px;
+}
+.meta-label{font-size:11px;color:var(--sub);line-height:1.4}
+
+/* ── INTEGRATION ── */
+.int-row{display:flex;gap:14px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.int-row:last-child{border-bottom:none;margin:0;padding:0}
+.int-tag{font-family:'JetBrains Mono',monospace;font-size:9px;min-width:108px;flex-shrink:0;padding-top:2px;letter-spacing:.05em;text-transform:uppercase}
+.int-text{font-size:13px;color:var(--sub);line-height:1.65}
+
+/* ── QUOTE ── */
+.quote-block{
+  border-left:3px solid var(--goldLine);
+  padding:20px 28px;
+  margin:24px 0;
+  background:var(--goldBg);
+  border-radius:0 6px 6px 0;
+}
+.quote-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(18px,2.5vw,24px);
+  font-style:italic;
+  font-weight:300;
+  color:var(--text);
+  line-height:1.6;
+  margin-bottom:10px;
+}
+.quote-attr{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
+
+/* ── DIVIDER ── */
+.ornament{
+  text-align:center;color:var(--goldLine);
+  letter-spacing:.3em;font-size:12px;margin:32px 0;
+}
+
+/* ── CTA ── */
+.cta-block{
+  background:var(--text);color:var(--white);
+  border-radius:8px;padding:36px;
+  text-align:center;margin-top:36px;
+}
+.cta-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:300;margin-bottom:10px;
+}
+.cta-sub{font-size:14px;color:rgba(255,255,255,.65);margin-bottom:24px;line-height:1.6}
+.cta-btn{
+  display:inline-block;background:var(--gold);
+  color:var(--white);border:none;cursor:pointer;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:.15em;padding:13px 32px;border-radius:3px;
+  text-decoration:none;transition:background .2s;
+}
+.cta-btn:hover{background:var(--goldD)}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .acc-grid,.meta-grid{grid-template-columns:1fr}
+  .pillar-grid{grid-template-columns:1fr 1fr}
+  .tier-price-main{font-size:20px}
+  .hero{padding:48px 20px 40px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">
+    <div class="hero-line"></div>
+    <span class="hero-badge">Formación Ejecutiva · Latinoamérica · 2026</span>
+    <div class="hero-line"></div>
+  </div>
+  <h1>MIEDE <em>AI Leaders</em></h1>
+  <p class="hero-sub">El programa que transforma líderes en arquitectos de Inteligencia Artificial exitosa — aplicando metodología validada en su propia empresa.</p>
+  <div class="hero-divider"></div>
+  <div class="hero-tags">
+    <span class="hero-tag">Juan Carlos Alzate García</span>
+    <span class="hero-tag">Certified ExO Coach</span>
+    <span class="hero-tag">ExO Mindset Award LatAm</span>
+    <span class="hero-tag">MIEDE 2.0 · 8 Pilares</span>
+    <span class="hero-tag">Validado en 4 empresas</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav-btn active" onclick="showTab('vision',this)">El Programa</button>
+  <button class="nav-btn" onclick="showTab('assessment',this)">Assessment</button>
+  <button class="nav-btn" onclick="showTab('programa',this)">Currículo</button>
+  <button class="nav-btn" onclick="showTab('tiers',this)">Modalidades</button>
+</nav>
+
+<div class="content">
+
+<!-- ══════════════════════════════
+     EL PROGRAMA (VISIÓN)
+══════════════════════════════ -->
+<div id="tab-vision" class="tab active">
+
+  <span class="sec-eyebrow">Por qué existe</span>
+  <h2 class="sec-title">La IA no falla por la tecnología.<br>Falla por la falta de metodología.</h2>
+  <p class="sec-sub">MIEDE AI Leaders nació de una realidad que se repite en toda Latinoamérica: las empresas tienen acceso a las mismas herramientas que las Fortune 500, pero carecen del diseño organizacional para que funcionen.</p>
+
+  <div class="quote-block">
+    <p class="quote-text">"Mientras otros te enseñan qué es la IA, MIEDE AI Leaders te acompaña a implementarla — comenzando por saber exactamente dónde estás."</p>
+    <div class="quote-attr">— Juan Carlos Alzate García · Fundador, Transformación ExO</div>
+  </div>
+
+  <div class="formula">
+    <div class="chip" style="color:var(--green);background:rgba(45,122,79,.06)">70%<br><span style="font-size:10px;font-weight:400">Personas & Cultura</span></div>
+    <div class="chip" style="color:var(--blue);background:rgba(42,95,138,.06)">25%<br><span style="font-size:10px;font-weight:400">Metodología</span></div>
+    <div class="chip" style="color:var(--muted);background:var(--cream)">5%<br><span style="font-size:10px;font-weight:400">Tecnología</span></div>
+    <div class="chip" style="color:var(--gold);background:var(--goldBg)">IA<br><span style="font-size:10px;font-weight:400">Capa Transversal</span></div>
+  </div>
+
+  <div class="card">
+    <span class="sec-eyebrow" style="font-size:9px">La realidad del mercado</span>
+    <div class="pain-row">
+      <div class="pain-num">74%</div>
+      <div class="pain-text">de proyectos de IA se estancan después del piloto. No por la tecnología — por la ausencia de metodología y diseño organizacional.</div>
+    </div>
+    <div class="pain-row">
+      <div class="pain-num">5.5%</div>
+      <div class="pain-text">de empresas captura valor real y sostenido de IA a escala empresarial. El resto está en modo "teatro de IA" (McKinsey, Nov 2025).</div>
+    </div>
+    <div class="pain-row">
+      <div class="pain-num">61%</div>
+      <div class="pain-text">de organizaciones no tiene datos listos para IA. El 44% ya sufrió consecuencias negativas por datos no gobernados (PwC 2025).</div>
+    </div>
+  </div>
+
+  <div class="card-cream">
+    <span class="sec-eyebrow" style="font-size:9px">Lo que diferencia a MIEDE AI Leaders</span>
+    <div class="arrow-item"><span class="arrow-sym">→</span><span class="arrow-text"><strong>El caso de estudio eres tú.</strong> Cada módulo se aplica sobre la empresa real del participante — no sobre casos de Amazon o Tesla.</span></div>
+    <div class="arrow-item"><span class="arrow-sym">→</span><span class="arrow-text"><strong>Metodología validada.</strong> MIEDE 2.0 fue aplicado y refinado en 4 empresas reales con resultados medibles y documentados.</span></div>
+    <div class="arrow-item"><span class="arrow-sym">→</span><span class="arrow-text"><strong>El CEO como protagonista.</strong> El programa fue diseñado para que el líder ejecutivo dirija personalmente la agenda de IA — no la delegue.</span></div>
+    <div class="arrow-item"><span class="arrow-sym">→</span><span class="arrow-text"><strong>30 años + ExO Certified + Award LatAm.</strong> Juan Carlos no enseña lo que leyó — enseña lo que implementó en organizaciones latinoamericanas.</span></div>
+  </div>
+
+  <div class="ornament">✦ ✦ ✦</div>
+
+  <div class="cta-block">
+    <div class="cta-title">¿Listo para conocer tu punto de partida?</div>
+    <p class="cta-sub">Antes de cualquier conversación, el primer paso es saber exactamente dónde está tu empresa.<br>El MIEDE Personal Assessment es gratuito y toma menos de 10 minutos.</p>
+    <a href="#" class="cta-btn">COMENZAR ASSESSMENT GRATUITO</a>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════
+     ASSESSMENT
+══════════════════════════════ -->
+<div id="tab-assessment" class="tab">
+
+  <span class="sec-eyebrow">El punto de partida</span>
+  <h2 class="sec-title">MIEDE Personal Assessment</h2>
+  <p class="sec-sub">Antes de cualquier módulo, necesitas saber con precisión dónde está tu empresa. El assessment MIEDE Personal es el mapa que orienta cada semana del programa.</p>
+
+  <div class="card-gold">
+    <div style="display:flex;gap:16px;align-items:flex-start">
+      <span style="font-size:36px;flex-shrink:0">🔍</span>
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--text);margin-bottom:8px">Diagnóstico integral de madurez digital e IA</div>
+        <div style="font-size:14px;color:var(--sub);line-height:1.7">40 criterios distribuidos en los 8 pilares MIEDE 2.0. El participante recibe su AI Score (0–200), nivel de madurez, radar chart personalizado y mapa de brechas por pilar al completarlo.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-card"><div class="meta-val">40</div><div class="meta-label">Criterios de evaluación<br>5 por cada pilar</div></div>
+    <div class="meta-card"><div class="meta-val">200</div><div class="meta-label">Puntaje máximo<br>Escala 1 a 5</div></div>
+    <div class="meta-card"><div class="meta-val">5</div><div class="meta-label">Niveles de madurez<br>Inicial → Optimizado</div></div>
+  </div>
+
+  <span class="sec-eyebrow">Escala de resultados</span>
+  <div class="level-row" style="background:rgba(184,64,64,.06);border:1px solid rgba(184,64,64,.2)"><div class="level-range" style="color:var(--red)">40–80</div><div><div class="level-name" style="color:var(--red)">Nivel 1 · Inicial</div><div class="level-desc">Sin estrategia digital definida. Procesos ad-hoc. Experimentación nula.</div></div></div>
+  <div class="level-row" style="background:rgba(184,104,32,.06);border:1px solid rgba(184,104,32,.2)"><div class="level-range" style="color:var(--orange)">81–120</div><div><div class="level-name" style="color:var(--orange)">Nivel 2 · En Desarrollo</div><div class="level-desc">Pilotos de IA emergentes y aislados. Sin escalabilidad ni governance.</div></div></div>
+  <div class="level-row" style="background:var(--goldBg);border:1px solid rgba(160,120,48,.2)"><div class="level-range" style="color:var(--gold)">121–150</div><div><div class="level-name" style="color:var(--gold)">Nivel 3 · Definido</div><div class="level-desc">Arquitectura de datos establecida. Estrategia de IA en marcha.</div></div></div>
+  <div class="level-row" style="background:rgba(42,95,138,.05);border:1px solid rgba(42,95,138,.18)"><div class="level-range" style="color:var(--blue)">151–180</div><div><div class="level-name" style="color:var(--blue)">Nivel 4 · Gestionado</div><div class="level-desc">Innovación con GenAI activa. ROI demostrado por área de negocio.</div></div></div>
+  <div class="level-row" style="background:rgba(45,122,79,.05);border:1px solid rgba(45,122,79,.2);margin-bottom:32px"><div class="level-range" style="color:var(--green)">181–200</div><div><div class="level-name" style="color:var(--green)">Nivel 5 · Optimizado</div><div class="level-desc">Fusión Digital alcanzada. IA en el ADN organizacional. ExO-Ready.</div></div></div>
+
+  <span class="sec-eyebrow">Los 8 pilares evaluados</span>
+  <div class="pillar-grid">
+    <div class="pillar-card" style="border-top-color:#A07830"><div class="pillar-icon">🔍</div><div class="pillar-num" style="color:#A07830">PILAR 01</div><div class="pillar-name">Evaluación + Madurez IA</div><div class="pillar-kpi">AI Score 0–200</div></div>
+    <div class="pillar-card" style="border-top-color:#2A5F8A"><div class="pillar-icon">🎯</div><div class="pillar-num" style="color:#2A5F8A">PILAR 02</div><div class="pillar-name">Estrategia Digital + MTP</div><div class="pillar-kpi">AI Roadmap 3 horizontes</div></div>
+    <div class="pillar-card" style="border-top-color:#B84040"><div class="pillar-icon">🧱</div><div class="pillar-num" style="color:#B84040">PILAR 03 ★</div><div class="pillar-name">Arquitectura de Datos e IA</div><div class="pillar-kpi">Data Readiness Index</div></div>
+    <div class="pillar-card" style="border-top-color:#6B4A9A"><div class="pillar-icon">⚙️</div><div class="pillar-num" style="color:#6B4A9A">PILAR 04</div><div class="pillar-name">Hiperautomatización + Agentes</div><div class="pillar-kpi">% procesos automatizados</div></div>
+    <div class="pillar-card" style="border-top-color:#2D7A4F"><div class="pillar-icon">💡</div><div class="pillar-num" style="color:#2D7A4F">PILAR 05</div><div class="pillar-name">Innovación + GenAI</div><div class="pillar-kpi">Nuevos revenue streams</div></div>
+    <div class="pillar-card" style="border-top-color:#B86820"><div class="pillar-icon">🧠</div><div class="pillar-num" style="color:#B86820">PILAR 06</div><div class="pillar-name">Capacidades Human + AI</div><div class="pillar-kpi">AI Literacy Index del equipo</div></div>
+    <div class="pillar-card" style="border-top-color:#1A7A6A"><div class="pillar-icon">🚀</div><div class="pillar-num" style="color:#1A7A6A">PILAR 07</div><div class="pillar-name">Modelo Negocio Disruptivo ExO</div><div class="pillar-kpi">ExO Attributes Score</div></div>
+    <div class="pillar-card" style="border-top-color:#A07830"><div class="pillar-icon">🦋</div><div class="pillar-num" style="color:#A07830">PILAR 08</div><div class="pillar-name">Fusión Digital — IA en el ADN</div><div class="pillar-kpi">OKRs IA en Directorio</div></div>
+  </div>
+
+  <div class="card">
+    <span class="sec-eyebrow" style="font-size:9px">Cómo se integra en el programa</span>
+    <div class="int-row"><div class="int-tag" style="color:var(--gold)">ANTES (Sem 0)</div><div class="int-text">El participante completa el assessment antes de la primera sesión. Llega a la Semana 1 con su AI Score real y el mapa de sus brechas. No hay módulo que inicie a ciegas.</div></div>
+    <div class="int-row"><div class="int-tag" style="color:var(--blue)">DURANTE</div><div class="int-text">Cada semana conecta la teoría del pilar con el score real del participante. Los entregables se construyen sobre la empresa propia — nunca sobre un caso ficticio.</div></div>
+    <div class="int-row"><div class="int-tag" style="color:var(--green)">AL CIERRE (Sem 8)</div><div class="int-text">El participante repite el assessment. La diferencia entre el AI Score inicial y final es la evidencia cuantificable de la transformación — lista para presentar al directorio.</div></div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════
+     CURRÍCULO (PROGRAMA)
+══════════════════════════════ -->
+<div id="tab-programa" class="tab">
+
+  <span class="sec-eyebrow">Estructura del aprendizaje</span>
+  <h2 class="sec-title">Semana 0 + 8 Semanas de Aplicación Real</h2>
+  <p class="sec-sub">Cada semana produce un entregable concreto para la empresa del participante. Al finalizar, el CEO tiene un roadmap de IA listo para presentar a su directorio.</p>
+
+  <div class="meta-grid">
+    <div class="meta-card"><div class="meta-val">Sem 0</div><div class="meta-label">Diagnóstico MIEDE Personal<br>Antes de la primera sesión</div></div>
+    <div class="meta-card"><div class="meta-val">8</div><div class="meta-label">Módulos en vivo<br>1 pilar · 1 entregable real</div></div>
+    <div class="meta-card"><div class="meta-val">2×</div><div class="meta-label">Assessment aplicado<br>Inicio vs Cierre · ROI demostrado</div></div>
+  </div>
+
+  <!-- SEM 0 -->
+  <div class="accordion" onclick="toggleAcc(this)" style="background:var(--goldBg);border-left:3px solid var(--goldLine)">
+    <div class="acc-head">
+      <div class="acc-week">Sem 0</div>
+      <div class="acc-info">
+        <div class="acc-title">Diagnóstico: MIEDE Personal Assessment <span class="acc-badge" style="background:rgba(160,120,48,.15);color:var(--gold);border:1px solid rgba(160,120,48,.3)">OBLIGATORIO</span></div>
+        <div class="acc-meta">Los 8 pilares · Previo a la Semana 1</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+      <div class="acc-desc">El participante completa el assessment en la plataforma online MIEDE Personal. Obtiene su AI Score (0–200), nivel de madurez, radar chart y mapa de brechas personalizado. Este diagnóstico es el hilo conductor de todas las semanas siguientes.</div>
+      <div class="acc-grid">
+        <div class="acc-item"><div class="acc-item-label">ENTREGABLE</div><div class="acc-item-val">Reporte ejecutivo + Radar chart + Mapa de brechas por pilar + Nivel de madurez inicial</div></div>
+        <div class="acc-item"><div class="acc-item-label">HERRAMIENTA</div><div class="acc-item-val">App MIEDE Personal · plataforma web en línea</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEM 1 -->
+  <div class="accordion" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <div class="acc-week">Sem 1</div>
+      <div class="acc-info">
+        <div class="acc-title">Liderazgo: El CEO como Arquitecto de IA <span class="acc-badge" style="background:rgba(160,120,48,.1);color:var(--gold);border:1px solid rgba(160,120,48,.25)">P01</span></div>
+        <div class="acc-meta">Pilar 1 · 2h sesión en vivo</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+      <div class="acc-desc">Revisión de resultados del assessment. El CEO diseña su estructura de governance de IA: quién es el owner, el comité de decisión y cómo se comunica internamente la agenda de IA. Sin sponsor ejecutivo comprometido, ningún proyecto escala.</div>
+      <div class="acc-grid">
+        <div class="acc-item"><div class="acc-item-label">ENTREGABLE</div><div class="acc-item-val">Mapa de Governance IA + Definición del AI Owner + Plan de comunicación interna</div></div>
+        <div class="acc-item"><div class="acc-item-label">HERRAMIENTA</div><div class="acc-item-val">Template Governance IA · Notion/Canvas</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEM 2 -->
+  <div class="accordion" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <div class="acc-week">Sem 2</div>
+      <div class="acc-info">
+        <div class="acc-title">Estrategia: Elegir los Casos de Uso que Importan <span class="acc-badge" style="background:rgba(42,95,138,.1);color:var(--blue);border:1px solid rgba(42,95,138,.25)">P02</span></div>
+        <div class="acc-meta">Pilar 2 · 2h sesión en vivo</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+      <div class="acc-desc">Del mapa de brechas del assessment a la hoja de ruta concreta. Matriz impacto/viabilidad para priorizar los 3 casos de uso de IA con mayor ROI. Definición del Propósito Transformador Masivo digital de la empresa.</div>
+      <div class="acc-grid">
+        <div class="acc-item"><div class="acc-item-label">ENTREGABLE</div><div class="acc-item-val">Portafolio priorizado de Casos de Uso + ROI estimado por caso + AI Roadmap 3 horizontes</div></div>
+        <div class="acc-item"><div class="acc-item-label">HERRAMIENTA</div><div class="acc-item-val">Canvas de Priorización IA + AI Roadmap template</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEM 3 -->
+  <div class="accordion" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <div class="acc-week">Sem 3</div>
+      <div class="acc-info">
+        <div class="acc-title">Datos: El Prerrequisito que el 61% Ignora <span class="acc-badge" style="background:rgba(184,64,64,.1);color:var(--red);border:1px solid rgba(184,64,64,.25)">P03 · CRÍTICO</span></div>
+        <div class="acc-meta">Pilar 3 · 2h sesión en vivo</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+      <div class="acc-desc">El pilar nuevo y más crítico de MIEDE 2.0. Sin datos gobernados y de calidad, ninguna herramienta de IA produce resultados. Se audita el estado real del dato: calidad, gobierno, integración y arquitectura básica IA-ready.</div>
+      <div class="acc-grid">
+        <div class="acc-item"><div class="acc-item-label">ENTREGABLE</div><div class="acc-item-val">Auditoría de Datos + Plan de Arquitectura básica IA-ready + Data Readiness Score</div></div>
+        <div class="acc-item"><div class="acc-item-label">HERRAMIENTA</div><div class="acc-item-val">Data Audit Canvas · Excel/Notion</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEM 4 -->
+  <div class="accordion" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <div class="acc-week">Sem 4</div>
+      <div class="acc-info">
+        <div class="acc-title">Procesos: Automatización con Inteligencia Real <span class="acc-badge" style="background:rgba(107,74,154,.1);color:var(--purple);border:1px solid rgba(107,74,154,.25)">P04</span></div>
+        <div class="acc-meta">Pilar 4 · 2h sesión en vivo</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+      <div class="acc-desc">Mapeo de las 5 interfaces críticas del negocio. Identificación de los 3 flujos más automatizables con mayor impacto. Diseño del proceso IA-augmented comparado con el proceso actual.</div>
+      <div class="acc-grid">
+        <div class="acc-item"><div class="acc-item-label">ENTREGABLE</div><div class="acc-item-val">Mapa de Procesos IA-augmented + Identificación de bots prioritarios + Diseño del flujo futuro</div></div>
+        <div class="acc-item"><div class="acc-item-label">HERRAMIENTA</div><div class="acc-item-val">Process Mining Canvas + Bots Roadmap</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEM 5 -->
+  <div class="accordion" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <div class="acc-week">Sem 5</div>
+      <div class="acc-info">
+        <div class="acc-title">Cliente: IA en el Frente del Negocio <span class="acc-badge" style="background:rgba(45,122,79,.1);color:var(--green);border:1px solid rgba(45,122,79,.25)">P05</span></div>
+        <div class="acc-meta">Pilar 5 · 2h sesión en vivo</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+      <div class="acc-desc">Hiperpersonalización, CX aumentado con IA y nuevas propuestas de valor generadas con GenAI. El cliente como termómetro real del éxito de la implementación.</div>
+      <div class="acc-grid">
+        <div class="acc-item"><div class="acc-item-label">ENTREGABLE</div><div class="acc-item-val">Propuesta CX con IA + Mapa de personalización + Métricas de experiencia post-IA</div></div>
+        <div class="acc-item"><div class="acc-item-label">HERRAMIENTA</div><div class="acc-item-val">CX-IA Canvas + Prototipo de propuesta de valor</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEM 6 -->
+  <div class="accordion" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <div class="acc-week">Sem 6</div>
+      <div class="acc-info">
+        <div class="acc-title">Talento: El Equipo que Sostiene la IA <span class="acc-badge" style="background:rgba(184,104,32,.1);color:var(--orange);border:1px solid rgba(184,104,32,.25)">P06</span></div>
+        <div class="acc-meta">Pilar 6 · 2h sesión en vivo</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+      <div class="acc-desc">Reskilling, nuevos roles organizacionales (AI Translator, Prompt Engineer interno), biblioteca de prompts corporativa y cultura de experimentación segura y sostenible.</div>
+      <div class="acc-grid">
+        <div class="acc-item"><div class="acc-item-label">ENTREGABLE</div><div class="acc-item-val">Plan de Reskilling + Roles IA nuevos + Biblioteca de Prompts corporativa v1</div></div>
+        <div class="acc-item"><div class="acc-item-label">HERRAMIENTA</div><div class="acc-item-val">AI Skills Matrix + Prompt Library template</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEM 7 -->
+  <div class="accordion" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <div class="acc-week">Sem 7</div>
+      <div class="acc-info">
+        <div class="acc-title">Innovación ExO: Escalar el Piloto <span class="acc-badge" style="background:rgba(26,122,106,.1);color:var(--teal);border:1px solid rgba(26,122,106,.25)">P07</span></div>
+        <div class="acc-meta">Pilar 7 · 2h sesión en vivo</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+      <div class="acc-desc">Metodología ExO aplicada al escalamiento del piloto de IA. Del experimento aislado al sistema que opera con mínima intervención humana. Atributos SCALE aplicados a la realidad de la empresa.</div>
+      <div class="acc-grid">
+        <div class="acc-item"><div class="acc-item-label">ENTREGABLE</div><div class="acc-item-val">Plan de Escalamiento ExO + Cronograma de expansión + Modelo de negocio IA-driven</div></div>
+        <div class="acc-item"><div class="acc-item-label">HERRAMIENTA</div><div class="acc-item-val">ExO Canvas + Scale Roadmap</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEM 8 -->
+  <div class="accordion" onclick="toggleAcc(this)" style="background:var(--goldBg);border-left:3px solid var(--goldLine)">
+    <div class="acc-head">
+      <div class="acc-week">Sem 8</div>
+      <div class="acc-info">
+        <div class="acc-title">Fusión Digital: Presentación al Directorio <span class="acc-badge" style="background:rgba(160,120,48,.15);color:var(--gold);border:1px solid rgba(160,120,48,.3)">P08 · GRADUACIÓN</span></div>
+        <div class="acc-meta">Pilar 8 · 2h sesión en vivo + Ceremonia de cierre</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+      <div class="acc-desc">El participante presenta su Roadmap de IA completo ante el grupo. Assessment MIEDE Personal de cierre para medir la evolución real. La diferencia entre el AI Score inicial y el final es el ROI cuantificable que el CEO lleva al directorio.</div>
+      <div class="acc-grid">
+        <div class="acc-item"><div class="acc-item-label">ENTREGABLE</div><div class="acc-item-val">Tablero de Mando IA + Roadmap 12 meses listo para Directorio + AI Score final vs inicial</div></div>
+        <div class="acc-item"><div class="acc-item-label">HERRAMIENTA</div><div class="acc-item-val">Dashboard IA + Assessment de cierre MIEDE Personal</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-cream" style="margin-top:16px">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;font-style:italic;line-height:1.7;color:var(--text)">En cualquier otro programa, los participantes analizan el caso de Amazon o Tesla. En MIEDE AI Leaders, <strong style="font-style:normal">el caso siempre es tu empresa.</strong> Al terminar la Semana 8, el CEO tiene un roadmap de IA construido con datos reales — no diapositivas de inspiración.</p>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════
+     MODALIDADES (TIERS)
+══════════════════════════════ -->
+<div id="tab-tiers" class="tab">
+
+  <span class="sec-eyebrow">Opciones de participación</span>
+  <h2 class="sec-title">Modalidades del Programa</h2>
+  <p class="sec-sub">Desde una primera sesión de exploración hasta un programa corporativo a medida. Cada modalidad incluye el MIEDE Personal Assessment como punto de partida.</p>
+
+  <!-- T1 -->
+  <div class="tier-card" onclick="toggleTier(this)">
+    <div class="tier-head">
+      <div class="tier-lv" style="background:rgba(42,95,138,.08);border:1px solid rgba(42,95,138,.3);color:var(--blue)">T1</div>
+      <div class="tier-info">
+        <div class="tier-name">Masterclass IA con MIEDE</div>
+        <div class="tier-tag" style="color:var(--blue)">PUERTA DE ENTRADA</div>
+      </div>
+      <div class="tier-price">
+        <div class="tier-price-main">$150</div>
+        <div class="tier-price-unit">por persona</div>
+      </div>
+    </div>
+    <div class="tier-body">
+      <div class="tier-assess"><div class="tier-assess-lbl">🔍 MIEDE ASSESSMENT INCLUIDO</div><div class="tier-assess-val">AI Score básico gratuito (8 preguntas) — primer diagnóstico de madurez digital.</div></div>
+      <div class="tier-items-lbl">Incluye</div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--blue)">✓</span><span>Sesión en vivo de 2.5h · formato webinar online</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--blue)">✓</span><span>1 pilar MIEDE + IA analizado en profundidad</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--blue)">✓</span><span>Herramienta práctica descargable del pilar</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--blue)">✓</span><span>Grabación disponible por 30 días</span></div>
+    </div>
+  </div>
+
+  <!-- T2 -->
+  <div class="tier-card" onclick="toggleTier(this)">
+    <div class="tier-head">
+      <div class="tier-lv" style="background:var(--goldBg);border:1px solid rgba(160,120,48,.4);color:var(--gold)">T2</div>
+      <div class="tier-info">
+        <div class="tier-name">MIEDE AI Practitioner</div>
+        <div class="tier-tag" style="color:var(--gold)">CERTIFICACIÓN INDIVIDUAL</div>
+      </div>
+      <div class="tier-price">
+        <div class="tier-price-main">$997</div>
+        <div class="tier-price-unit">por persona</div>
+      </div>
+    </div>
+    <div class="tier-body">
+      <div class="tier-assess"><div class="tier-assess-lbl">🔍 MIEDE ASSESSMENT INCLUIDO</div><div class="tier-assess-val">Full Assessment 40 criterios — aplicado al inicio (Sem 0) y al cierre (Sem 8) para medir la evolución real de la empresa.</div></div>
+      <div class="tier-items-lbl">Incluye</div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--gold)">✓</span><span>8 semanas online en vivo · cohortes de hasta 20 participantes</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--gold)">✓</span><span>Assessment completo inicio y cierre con radar chart</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--gold)">✓</span><span>Un módulo · un pilar · un entregable real de su empresa</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--gold)">✓</span><span>Sesión de mentoría grupal con Juan Carlos</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--gold)">✓</span><span>Comunidad privada de cohorte</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--gold)">✓</span><span>🏅 Certificación MIEDE AI Practitioner</span></div>
+    </div>
+  </div>
+
+  <!-- T3 -->
+  <div class="tier-card" onclick="toggleTier(this)">
+    <div class="tier-head">
+      <div class="tier-lv" style="background:rgba(107,74,154,.08);border:1px solid rgba(107,74,154,.3);color:var(--purple)">T3</div>
+      <div class="tier-info">
+        <div class="tier-name">MIEDE AI Sprint Empresarial</div>
+        <div class="tier-tag" style="color:var(--purple)">IMPLEMENTACIÓN REAL</div>
+      </div>
+      <div class="tier-price">
+        <div class="tier-price-main">$3.500</div>
+        <div class="tier-price-unit">empresa (hasta 3 personas)</div>
+      </div>
+    </div>
+    <div class="tier-body">
+      <div class="tier-assess"><div class="tier-assess-lbl">🔍 MIEDE ASSESSMENT INCLUIDO</div><div class="tier-assess-val">Diagnóstico empresarial completo: assessment integral + mapa de brechas + roadmap de 90 días para arrancar el primer proyecto de IA.</div></div>
+      <div class="tier-items-lbl">Incluye</div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--purple)">✓</span><span>10 semanas · máximo 8 empresas por cohorte</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--purple)">✓</span><span>Diagnóstico MIEDE 2.0 full enterprise (Semana 0)</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--purple)">✓</span><span>Piloto de IA en producción al finalizar el programa</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--purple)">✓</span><span>2 mentorías individuales con Juan Carlos</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--purple)">✓</span><span>Revisión de arquitectura de datos</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--purple)">✓</span><span>🏅 Certificación MIEDE AI Company</span></div>
+    </div>
+  </div>
+
+  <!-- T4 -->
+  <div class="tier-card" onclick="toggleTier(this)">
+    <div class="tier-head">
+      <div class="tier-lv" style="background:var(--goldBg);border:1px solid rgba(160,120,48,.4);color:var(--gold)">T4</div>
+      <div class="tier-info">
+        <div class="tier-name">MIEDE AI Executive Circle</div>
+        <div class="tier-tag" style="color:var(--gold)">PROGRAMA ÉLITE · SOLO CEOs</div>
+      </div>
+      <div class="tier-price">
+        <div class="tier-price-main">$9.000</div>
+        <div class="tier-price-unit">por CEO · membresía anual</div>
+      </div>
+    </div>
+    <div class="tier-body">
+      <div class="tier-assess"><div class="tier-assess-lbl">🔍 MIEDE ASSESSMENT INCLUIDO</div><div class="tier-assess-val">Dashboard de seguimiento trimestral del AI Score de su empresa vs el benchmark del círculo de CEOs pares.</div></div>
+      <div class="tier-items-lbl">Incluye</div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--gold)">✓</span><span>12 sesiones mensuales exclusivas · solo CEOs</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--gold)">✓</span><span>Benchmark trimestral: su empresa vs pares del círculo</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--gold)">✓</span><span>Acceso directo a Juan Carlos</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--gold)">✓</span><span>Revisión de proyectos de IA activos</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--gold)">✓</span><span>Invitación a talleres presenciales exclusivos</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--gold)">✓</span><span>Red privada de 10 CEOs MIEDE LatAm</span></div>
+    </div>
+  </div>
+
+  <!-- T5 -->
+  <div class="tier-card" onclick="toggleTier(this)">
+    <div class="tier-head">
+      <div class="tier-lv" style="background:rgba(45,122,79,.08);border:1px solid rgba(45,122,79,.3);color:var(--green)">T5</div>
+      <div class="tier-info">
+        <div class="tier-name">MIEDE AI Corporate</div>
+        <div class="tier-tag" style="color:var(--green)">PROGRAMA CORPORATIVO A MEDIDA</div>
+      </div>
+      <div class="tier-price">
+        <div class="tier-price-main" style="font-size:18px">A convenir</div>
+        <div class="tier-price-unit">inversión evaluada en sesiones<br>de trabajo conjuntas</div>
+      </div>
+    </div>
+    <div class="tier-body">
+      <div class="tier-assess"><div class="tier-assess-lbl">🔍 MIEDE ASSESSMENT INCLUIDO</div><div class="tier-assess-val">Diagnóstico masivo por áreas + comparativa multi-departamento + roadmap por unidad de negocio + certificación del equipo directivo completo.</div></div>
+      <div class="tier-items-lbl">Incluye</div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--green)">✓</span><span>Diagnóstico MIEDE 2.0 full enterprise por departamento</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--green)">✓</span><span>Diseño curricular sectorial a medida</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--green)">✓</span><span>Facilitación presencial + online según necesidad</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--green)">✓</span><span>🏅 Certificación del equipo directivo completo</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--green)">✓</span><span>Transferencia metodológica MIEDE a la organización</span></div>
+      <div class="tier-item"><span class="tier-check" style="color:var(--green)">✓</span><span>Alianza estratégica con Transformación ExO</span></div>
+    </div>
+  </div>
+
+  <div class="cta-block">
+    <div class="cta-title">¿No sabes cuál modalidad te corresponde?</div>
+    <p class="cta-sub">Comienza por el Assessment gratuito. Tu AI Score determina qué modalidad tiene más sentido para el momento actual de tu empresa.</p>
+    <a href="#" class="cta-btn">HACER EL ASSESSMENT GRATUITO</a>
+  </div>
+
+</div>
+
+</div><!-- /content -->
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleAcc(el) {
+  const body = el.querySelector('.acc-body');
+  const arrow = el.querySelector('.acc-arrow');
+  const open = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  arrow.textContent = open ? '▼' : '▲';
+}
+function toggleTier(el) {
+  const body = el.querySelector('.tier-body');
+  body.classList.toggle('open', !body.classList.contains('open'));
+}
+</script>
+</body>
+</html>
